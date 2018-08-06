@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Navbar from './navbar';
 import Dashboard from './dashboard';
@@ -25,6 +26,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <CssBaseline />
         <BrowserRouter>
           <div>
             <Navbar />
