@@ -25,8 +25,7 @@ const styles = (theme) => ({
     padding: theme.spacing.unit * 2
   },
   button: {
-    margin: 'auto',
-    width: '95%'
+    margin: 10
   },
   cardHeading: {
     padding: theme.spacing.unit,
@@ -75,7 +74,7 @@ class Dashboard extends Component {
                 <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
               </Grid>
               <Grid item direction="column" xs={9}>
-                <Typography gutterBottom variant="subtitle">
+                <Typography gutterBottom variant="body2">
                   Would you rather...
                 </Typography>
                 <Typography color="textSecondary">
