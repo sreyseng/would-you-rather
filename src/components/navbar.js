@@ -49,10 +49,20 @@ class Navbar extends Component {
               </Button>
             </div>
             <div className={classes.menuRight}>
-              <span className={classes.welcome}>Hello, {this.props.user.name}</span>
-              <Button color="inherit" onClick={this.logout.bind(this)}>
-                Logout
-              </Button>
+              {this.props.authentication ? (
+                <div>
+                  <span className={classes.welcome}>Hello, {this.props.user.name}</span>
+                  <Button color="inherit" onClick={this.logout.bind(this)}>
+                    Logout
+                  </Button>
+                </div>
+              ) : (
+                <div>
+                  <Button color="inherit" to="/">
+                    Login
+                  </Button>
+                </div>
+              )}
             </div>
           </Toolbar>
         </AppBar>
@@ -63,7 +73,8 @@ class Navbar extends Component {
 
 function mapStateToProps({ users, authentication }) {
   return {
-    user: users[authentication]
+    user: users[authentication],
+    authentication
   };
 }
 

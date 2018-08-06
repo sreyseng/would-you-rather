@@ -14,9 +14,9 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <div>
+            <Navbar />
             {this.props.authentication ? (
               <div>
-                <Navbar />
                 <Switch>
                   <Route path="/add" component={NewQuestion} />
                   <Route path="/leaderboard" component={Leaderboard} />
