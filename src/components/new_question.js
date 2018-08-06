@@ -17,7 +17,7 @@ const styles = (theme) => ({
   input: {
     textAlign: 'left',
     width: '100%',
-    margin: theme.spacing.unit * 2
+    margin: theme.spacing.unit
   },
   content: {
     textAlign: 'center',
