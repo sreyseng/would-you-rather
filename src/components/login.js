@@ -7,7 +7,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+
 import { handleLogin, handleGetUsers } from '../actions';
+import { width } from 'window-size';
 
 const styles = (theme) => ({
   root: {
@@ -16,6 +23,20 @@ const styles = (theme) => ({
     paddingBottom: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2,
     textAlign: 'center'
+  },
+  formstyle: {
+    marginTop: theme.spacing.unit * 2
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 250
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
+  },
+  button: {
+    margin: theme.spacing.unit,
+    minWidth: 250
   }
 });
 
@@ -24,7 +45,7 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      user: null
+      user: ''
     };
   }
 
@@ -56,21 +77,35 @@ class Login extends Component {
             Welcome to the Would You Rather App!
           </Typography>
           <Typography component="p">Please sign in to continue.</Typography>
-        </Paper>
 
-        <form onSubmit={this.onFormSubmit.bind(this)}>
-          <select onChange={this.onSelectChange.bind(this)} defaultValue="0">
-            <option key="0" value="0" disabled>
-              Select login
-            </option>
-            {_.map(this.props.users, (item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Submit</button>
-        </form>
+          <form
+            className={classes.formstyle}
+            autoComplete="off"
+            onSubmit={this.onFormSubmit.bind(this)}>
+            <FormControl className={classes.formControl}>
+              <InputLabel>Please login</InputLabel>
+              <Select value={this.state.user} onChange={this.onSelectChange}>
+                <MenuItem key="none" value="">
+                  <em>None</em>
+                </MenuItem>
+                {_.map(this.props.users, (user) => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {user.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              size="medium"
+              color="primary"
+              className={classes.button}>
+              Submit
+            </Button>
+          </form>
+        </Paper>
       </div>
     );
   }
