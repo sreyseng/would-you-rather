@@ -14,7 +14,6 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
 import { handleLogin, handleGetUsers } from '../actions';
-import { width } from 'window-size';
 
 const styles = (theme) => ({
   root: {
