@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -24,14 +25,21 @@ const styles = {
 
 const Navbar = (props) => {
   const { classes } = props;
+
   return (
     <div className={classes.roots}>
       <AppBar position="static" color="default">
         <Toolbar>
           <div className={classes.menuLeft}>
-            <Button color="inherit">Dashboard</Button>
-            <Button color="inherit">New Question</Button>
-            <Button color="inherit">Leaderboard</Button>
+            <Button color="inherit" component={Link} to="/">
+              Dashboard
+            </Button>
+            <Button color="inherit" component={Link} to="/add">
+              New Question
+            </Button>
+            <Button color="inherit" component={Link} to="/leaderboard">
+              Leaderboard
+            </Button>
           </div>
           <div className={classes.menuRight}>
             <span className={classes.welcome}>Hello, John Doe</span>

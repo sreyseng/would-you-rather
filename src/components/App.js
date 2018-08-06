@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import Navbar from './navbar';
 import Dashboard from './dashboard';
+import NewQuestion from './new_question';
+import Leaderboard from './leaderboard';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <Dashboard />
+        <BrowserRouter>
+          <div>
+            <Navbar />
+            <Switch>
+              <Route path="/add" component={NewQuestion} />
+              <Route path="/leaderboard" component={Leaderboard} />
+              <Route path="/" component={Dashboard} />
+            </Switch>
+          </div>
+        </BrowserRouter>
       </div>
     );
   }
