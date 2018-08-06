@@ -12,7 +12,7 @@ const ROOT = '/';
 const ADD = '/add';
 const LEADERBOARD = '/leaderboard';
 
-const styles = {
+const styles = (theme) => ({
   root: {
     display: 'flex'
   },
@@ -26,8 +26,11 @@ const styles = {
   },
   welcome: {
     marginRight: '20px'
+  },
+  button: {
+    backgroundColor: theme.palette.action.selected
   }
-};
+});
 
 class Navbar extends Component {
   logout = () => {
@@ -49,21 +52,21 @@ class Navbar extends Component {
                 color="inherit"
                 component={Link}
                 to={ROOT}
-                variant={pathname === ROOT ? 'contained' : 'text'}>
+                className={pathname === ROOT ? classes.button : false}>
                 Dashboard
               </Button>
               <Button
                 color="inherit"
                 component={Link}
                 to={ADD}
-                variant={pathname === ADD ? 'contained' : 'text'}>
+                className={pathname === ADD ? classes.button : false}>
                 New Question
               </Button>
               <Button
                 color="inherit"
                 component={Link}
                 to={LEADERBOARD}
-                variant={pathname === LEADERBOARD ? 'contained' : 'text'}>
+                className={pathname === LEADERBOARD ? classes.button : false}>
                 Leaderboard
               </Button>
             </div>

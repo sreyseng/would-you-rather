@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import Navbar from './navbar';
 import Dashboard from './dashboard';
@@ -23,10 +24,12 @@ const styles = (theme) => ({
   }
 });
 
+const theme = createMuiTheme();
+
 class App extends Component {
   render() {
     return (
-      <div>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
           <div>
@@ -49,7 +52,7 @@ class App extends Component {
             </Paper>
           </div>
         </BrowserRouter>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -26,12 +26,11 @@ const styles = (theme) => ({
   },
   button: {
     margin: 'auto',
-    width: '95%',
-    margin: 10
+    width: '95%'
   },
   cardHeading: {
     padding: theme.spacing.unit,
-    backgroundColor: theme.palette.secondary.light,
+    backgroundColor: theme.palette.grey[200],
     textAlign: 'left'
   }
 });
@@ -63,30 +62,6 @@ class Dashboard extends Component {
           <Tab label="Unanswered Questions" />
           <Tab label="Answered Questions" />
         </Tabs>
-
-        {/* <Card className={classes.root}> */}
-        {/* <Grid container spacing={16}>
-            <Grid item>
-              <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
-            </Grid>
-
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={16}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subheading">
-                    John Doe asks:
-                  </Typography>
-                  <Typography gutterBottom>Would you rather</Typography>
-                  <Typography color="textSecondary">...be a frontend...</Typography>
-                </Grid>
-                <Grid item />
-              </Grid>
-              <Grid item>
-                <Button variant="text">View Poll</Button>
-              </Grid>
-            </Grid>
-          </Grid> */}
-        {/* </Card> */}
 
         <div className={classes.root}>
           <Card>
