@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import InputLabel from '@material-ui/core/InputLabel';
@@ -72,42 +71,40 @@ class Login extends Component {
 
     return (
       <div>
-        <Paper className={classes.root} elevation={1}>
-          <Typography variant="headline" component="h3">
-            Welcome to the Would You Rather App!
-          </Typography>
-          <Typography component="p">Please sign in to continue.</Typography>
+        <Typography variant="headline" component="h3">
+          Welcome to the Would You Rather App!
+        </Typography>
+        <Typography component="p">Please sign in to continue.</Typography>
 
-          <form
-            className={classes.formstyle}
-            autoComplete="off"
-            onSubmit={this.onFormSubmit.bind(this)}>
-            <FormControl required className={classes.formControl}>
-              <InputLabel>Please login</InputLabel>
-              <Select value={this.state.user} onChange={this.onSelectChange}>
-                <MenuItem key="none" value="">
-                  <em>None</em>
+        <form
+          className={classes.formstyle}
+          autoComplete="off"
+          onSubmit={this.onFormSubmit.bind(this)}>
+          <FormControl required className={classes.formControl}>
+            <InputLabel>Please login</InputLabel>
+            <Select value={this.state.user} onChange={this.onSelectChange}>
+              <MenuItem key="none" value="">
+                <em>None</em>
+              </MenuItem>
+              {_.map(this.props.users, (user) => (
+                <MenuItem key={user.id} value={user.id}>
+                  {user.name}
                 </MenuItem>
-                {_.map(this.props.users, (user) => (
-                  <MenuItem key={user.id} value={user.id}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>Required</FormHelperText>
-            </FormControl>
-            <br />
-            <Button
-              type="submit"
-              variant="contained"
-              size="medium"
-              color="primary"
-              disabled={!this.state.user}
-              className={classes.button}>
-              Submit
-            </Button>
-          </form>
-        </Paper>
+              ))}
+            </Select>
+            <FormHelperText>Required</FormHelperText>
+          </FormControl>
+          <br />
+          <Button
+            type="submit"
+            variant="contained"
+            size="medium"
+            color="primary"
+            disabled={!this.state.user}
+            className={classes.button}>
+            Submit
+          </Button>
+        </form>
       </div>
     );
   }

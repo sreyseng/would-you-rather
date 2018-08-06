@@ -8,6 +8,19 @@ import NewQuestion from './new_question';
 import Leaderboard from './leaderboard';
 import Login from './login';
 
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+
+const styles = (theme) => ({
+  paper: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+    textAlign: 'center'
+  }
+});
+
 class App extends Component {
   render() {
     return (
@@ -15,20 +28,22 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Navbar />
-            {this.props.authentication ? (
-              <div>
-                <Switch>
-                  <Route path="/add" component={NewQuestion} />
-                  <Route path="/leaderboard" component={Leaderboard} />
-                  <Route path="/login" component={Login} />
-                  <Route path="/" component={Dashboard} />
-                </Switch>
-              </div>
-            ) : (
-              <div>
-                <Login />
-              </div>
-            )}
+            <Paper className={this.props.classes.paper} elevation={1}>
+              {this.props.authentication ? (
+                <div>
+                  <Switch>
+                    <Route path="/add" component={NewQuestion} />
+                    <Route path="/leaderboard" component={Leaderboard} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/" component={Dashboard} />
+                  </Switch>
+                </div>
+              ) : (
+                <div>
+                  <Login />
+                </div>
+              )}
+            </Paper>
           </div>
         </BrowserRouter>
       </div>
@@ -42,4 +57,4 @@ function mapStateToProps({ authentication }) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(withStyles(styles)(App));
