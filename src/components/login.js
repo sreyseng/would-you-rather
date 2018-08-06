@@ -21,14 +21,14 @@ const styles = (theme) => ({
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 250
+    width: '75%'
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
   },
   button: {
     margin: theme.spacing.unit,
-    minWidth: 250
+    width: '75%'
   }
 });
 
