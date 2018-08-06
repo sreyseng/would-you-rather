@@ -43,7 +43,9 @@ const Navbar = (props) => {
           </div>
           <div className={classes.menuRight}>
             <span className={classes.welcome}>Hello, John Doe</span>
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" component={Link} to="/login">
+              Login
+            </Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -51,7 +53,7 @@ const Navbar = (props) => {
   );
 };
 
-Navbar.PropTypes = {
+Navbar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 

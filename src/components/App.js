@@ -5,6 +5,7 @@ import Navbar from './navbar';
 import Dashboard from './dashboard';
 import NewQuestion from './new_question';
 import Leaderboard from './leaderboard';
+import Login from './login';
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             <Switch>
               <Route path="/add" component={NewQuestion} />
               <Route path="/leaderboard" component={Leaderboard} />
+              <Route path="/login" component={Login} />
               <Route path="/" component={Dashboard} />
             </Switch>
           </div>
