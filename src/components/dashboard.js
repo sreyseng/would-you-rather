@@ -12,16 +12,27 @@ import Grid from '@material-ui/core/Grid';
 const styles = (theme) => ({
   cardAvatar: {
     width: 100,
-    height: 100
+    height: 100,
+    margin: 10
   },
   tabs: {
-    marginBottom: 10
+    marginBottom: theme.spacing.unit
   },
   root: {
     margin: 'auto',
     flexGrow: 1,
     maxWidth: 600,
     padding: theme.spacing.unit * 2
+  },
+  button: {
+    margin: 'auto',
+    width: '95%',
+    margin: 10
+  },
+  cardHeading: {
+    padding: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.light,
+    textAlign: 'left'
   }
 });
 
@@ -53,8 +64,8 @@ class Dashboard extends Component {
           <Tab label="Answered Questions" />
         </Tabs>
 
-        <Card className={classes.root}>
-          <Grid container spacing={16}>
+        {/* <Card className={classes.root}> */}
+        {/* <Grid container spacing={16}>
             <Grid item>
               <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
             </Grid>
@@ -74,8 +85,36 @@ class Dashboard extends Component {
                 <Button variant="text">View Poll</Button>
               </Grid>
             </Grid>
-          </Grid>
-        </Card>
+          </Grid> */}
+        {/* </Card> */}
+
+        <div className={classes.root}>
+          <Card>
+            <Grid container direction="row" justify="space-around" alignItems="center">
+              <Grid item xs={12} className={classes.cardHeading}>
+                <Typography gutterBottom variant="subheading">
+                  Tyler McGinnis Asks:
+                </Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
+              </Grid>
+              <Grid item direction="column" xs={9}>
+                <Typography gutterBottom variant="subtitle">
+                  Would you rather...
+                </Typography>
+                <Typography color="textSecondary">
+                  be a software engineer or be a teacher?
+                </Typography>
+                <Typography align="right">
+                  <Button variant="outlined" className={classes.button}>
+                    View Poll
+                  </Button>
+                </Typography>
+              </Grid>
+            </Grid>
+          </Card>
+        </div>
       </div>
     );
   }
