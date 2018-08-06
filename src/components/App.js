@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -21,14 +21,6 @@ const styles = (theme) => ({
     marginTop: theme.spacing.unit * 2,
     maxWidth: '75%',
     margin: 'auto'
-  },
-  fab: {
-    margin: theme.spacing.unit * 2
-  },
-  absolute: {
-    position: 'absolute',
-    bottom: theme.spacing.unit * 3,
-    right: theme.spacing.unit * 4
   }
 });
 
@@ -36,7 +28,6 @@ const theme = createMuiTheme();
 
 class App extends Component {
   render() {
-    const { classes } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />

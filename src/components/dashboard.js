@@ -73,7 +73,7 @@ class Dashboard extends Component {
               <Grid item xs={3}>
                 <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
               </Grid>
-              <Grid item direction="column" xs={9}>
+              <Grid item xs={9}>
                 <Typography gutterBottom variant="body2">
                   Would you rather...
                 </Typography>

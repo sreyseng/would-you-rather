@@ -52,21 +52,21 @@ class Navbar extends Component {
                 color="inherit"
                 component={Link}
                 to={ROOT}
-                className={pathname === ROOT ? classes.button : false}>
+                className={pathname === ROOT ? classes.button : 'false'}>
                 Dashboard
               </Button>
               <Button
                 color="inherit"
                 component={Link}
                 to={ADD}
-                className={pathname === ADD ? classes.button : false}>
+                className={pathname === ADD ? classes.button : 'false'}>
                 New Question
               </Button>
               <Button
                 color="inherit"
                 component={Link}
                 to={LEADERBOARD}
-                className={pathname === LEADERBOARD ? classes.button : false}>
+                className={pathname === LEADERBOARD ? classes.button : 'false'}>
                 Leaderboard
               </Button>
             </div>
