@@ -2,7 +2,22 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 import { handleLogin, handleGetUsers } from '../actions';
+
+const styles = (theme) => ({
+  root: {
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing.unit * 2,
+    textAlign: 'center'
+  }
+});
 
 class Login extends Component {
   constructor(props) {
@@ -32,9 +47,16 @@ class Login extends Component {
       return <Redirect to="/" />;
     }
 
+    const { classes } = this.props;
+
     return (
       <div>
-        <h3>Login</h3>
+        <Paper className={classes.root} elevation={1}>
+          <Typography variant="headline" component="h3">
+            Welcome to the Would You Rather App!
+          </Typography>
+          <Typography component="p">Please sign in to continue.</Typography>
+        </Paper>
 
         <form onSubmit={this.onFormSubmit.bind(this)}>
           <select onChange={this.onSelectChange.bind(this)} defaultValue="0">
@@ -61,4 +83,8 @@ function mapStateToProps({ users, authentication }) {
   };
 }
 
-export default connect(mapStateToProps)(Login);
+Login.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(Login));
