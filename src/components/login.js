@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { handleLogin, handleGetUsers } from '../actions';
 
@@ -81,7 +82,7 @@ class Login extends Component {
             className={classes.formstyle}
             autoComplete="off"
             onSubmit={this.onFormSubmit.bind(this)}>
-            <FormControl className={classes.formControl}>
+            <FormControl required className={classes.formControl}>
               <InputLabel>Please login</InputLabel>
               <Select value={this.state.user} onChange={this.onSelectChange}>
                 <MenuItem key="none" value="">
@@ -93,6 +94,7 @@ class Login extends Component {
                   </MenuItem>
                 ))}
               </Select>
+              <FormHelperText>Required</FormHelperText>
             </FormControl>
             <br />
             <Button
@@ -100,6 +102,7 @@ class Login extends Component {
               variant="contained"
               size="medium"
               color="primary"
+              disabled={!this.state.user}
               className={classes.button}>
               Submit
             </Button>
