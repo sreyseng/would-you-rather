@@ -1,10 +1,10 @@
-import { SET_AUTHENTICATION } from '../actions/index';
+import { RECIEVE_USERS } from '../actions/index';
 
-export default function authedUser(state = null, action) {
+export default function authedUser(state = {}, action) {
   switch (action.type) {
-    case SET_AUTHENTICATION:
-      console.log('SET_AUTHENTICATION :', action.payload.id);
-      return action.payload.id;
+    case RECIEVE_USERS:
+      console.log('RECIEVE_USERS :', action.payload);
+      return { ...state, ...action.payload.users };
     default:
       return state;
   }
