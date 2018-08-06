@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,6 +7,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import { handleLogout } from '../actions';
+
+const ROOT = '/';
+const ADD = '/add';
+const LEADERBOARD = '/leaderboard';
 
 const styles = {
   root: {
@@ -31,20 +35,35 @@ class Navbar extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      location: { pathname }
+    } = this.props;
 
     return (
       <div className={classes.roots}>
         <AppBar position="static" color="default">
           <Toolbar>
             <div className={classes.menuLeft}>
-              <Button color="inherit" component={Link} to="/">
+              <Button
+                color="inherit"
+                component={Link}
+                to={ROOT}
+                variant={pathname === ROOT ? 'contained' : 'text'}>
                 Dashboard
               </Button>
-              <Button color="inherit" component={Link} to="/add">
+              <Button
+                color="inherit"
+                component={Link}
+                to={ADD}
+                variant={pathname === ADD ? 'contained' : 'text'}>
                 New Question
               </Button>
-              <Button color="inherit" component={Link} to="/leaderboard">
+              <Button
+                color="inherit"
+                component={Link}
+                to={LEADERBOARD}
+                variant={pathname === LEADERBOARD ? 'contained' : 'text'}>
                 Leaderboard
               </Button>
             </div>
@@ -82,4 +101,4 @@ Navbar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Navbar));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Navbar)));
