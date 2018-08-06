@@ -5,6 +5,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const OPTION_ONE = 'optionOne';
 const OPTION_TWO = 'optionTwo';
@@ -23,6 +24,10 @@ const styles = (theme) => ({
     textAlign: 'center',
     maxWidth: 600,
     margin: 'auto'
+  },
+  button: {
+    width: 150,
+    margin: 10
   }
 });
 
@@ -75,11 +80,25 @@ class NewQuestion extends Component {
               value={this.state.optionTwo}
               onChange={(event) => this.handleChange(event, OPTION_TWO)}
             />
-          </FormControl>{' '}
-          <br />
-          <Button type="submit" variant="contained" size="medium" color="primary">
-            Submit
+          </FormControl>
+          <Button
+            to="/"
+            component={Link}
+            type="cancel"
+            variant="contained"
+            size="medium"
+            color="secondary"
+            className={classes.button}>
+            Cancel
           </Button>
+          <Button
+            type="submit"
+            variant="contained"
+            size="medium"
+            color="primary"
+            className={classes.button}>
+            Submit
+          </Button>{' '}
         </form>
       </div>
     );

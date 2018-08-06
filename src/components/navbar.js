@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import { handleLogout } from '../actions';
 
 const ROOT = '/';
-const ADD = '/add';
+export const ADD = '/add';
 const LEADERBOARD = '/leaderboard';
 
 const styles = (theme) => ({
@@ -80,7 +80,7 @@ class Navbar extends Component {
                 </div>
               ) : (
                 <div>
-                  <Button color="inherit" to="/">
+                  <Button color="inherit" to="/" component={Link}>
                     Login
                   </Button>
                 </div>
