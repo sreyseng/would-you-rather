@@ -11,7 +11,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { handleLogin, handleGetUsers } from '../actions';
 
@@ -20,15 +19,17 @@ const styles = (theme) => ({
     marginTop: theme.spacing.unit * 2
   },
   formControl: {
-    margin: theme.spacing.unit,
-    width: '75%'
+    textAlign: 'left',
+    width: '100%',
+    margin: theme.spacing.unit
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
   },
-  button: {
-    margin: theme.spacing.unit,
-    width: '75%'
+  content: {
+    textAlign: 'center',
+    maxWidth: 600,
+    margin: 'auto'
   }
 });
 
@@ -63,17 +64,15 @@ class Login extends Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <Typography variant="headline" component="h3">
-          Welcome to the Would You Rather App!
-        </Typography>
-        <Typography component="p">Please sign in to continue.</Typography>
+      <div className={classes.content}>
+        <Typography variant="headline">Welcome to the Would You Rather App!</Typography>
+        <Typography variant="subheading">Please sign in to continue.</Typography>
 
         <form
           className={classes.formstyle}
           autoComplete="off"
           onSubmit={this.onFormSubmit.bind(this)}>
-          <FormControl required className={classes.formControl}>
+          <FormControl className={classes.formControl}>
             <InputLabel>Please login</InputLabel>
             <Select value={this.state.user} onChange={this.onSelectChange}>
               <MenuItem key="none" value="">
@@ -85,7 +84,6 @@ class Login extends Component {
                 </MenuItem>
               ))}
             </Select>
-            <FormHelperText>Required</FormHelperText>
           </FormControl>
           <br />
           <Button
@@ -93,8 +91,7 @@ class Login extends Component {
             variant="contained"
             size="medium"
             color="primary"
-            disabled={!this.state.user}
-            className={classes.button}>
+            disabled={!this.state.user}>
             Submit
           </Button>
         </form>

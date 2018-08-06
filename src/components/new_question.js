@@ -15,8 +15,14 @@ const styles = (theme) => ({
     flexWrap: 'wrap'
   },
   input: {
-    width: '75%',
+    textAlign: 'left',
+    width: '100%',
     margin: theme.spacing.unit * 2
+  },
+  content: {
+    textAlign: 'center',
+    maxWidth: 600,
+    margin: 'auto'
   }
 });
 
@@ -45,41 +51,33 @@ class NewQuestion extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <Typography variant="headline" component="h3">
-          Create New Question
+      <div className={classes.content}>
+        <Typography variant="headline">Create New Question</Typography>
+        <Typography variant="subheading">
+          Create a new question by providing two options below.
         </Typography>
-        <Typography component="p">Create a new question by providing two options below.</Typography>
 
         <form autoComplete="off" onSubmit={this.onFormSubmit.bind(this)}>
           <FormControl required className={classes.input}>
             <InputLabel htmlFor={OPTION_ONE}>Would you rather ...</InputLabel>
             <Input
               id={OPTION_ONE}
-              placeholder="Go with Option One"
+              placeholder="Enter option one"
               value={this.state.optionOne}
               onChange={(event) => this.handleChange(event, OPTION_ONE)}
             />
           </FormControl>
-          <Typography variant="headline" component="h5">
-            OR
-          </Typography>
           <FormControl required className={classes.input}>
             <InputLabel htmlFor={OPTION_TWO}>Would you rather ...</InputLabel>
             <Input
               id={OPTION_TWO}
-              placeholder="Go with Option Two"
+              placeholder="Enter option two"
               value={this.state.optionTwo}
               onChange={(event) => this.handleChange(event, OPTION_TWO)}
             />
           </FormControl>{' '}
           <br />
-          <Button
-            type="submit"
-            variant="contained"
-            size="medium"
-            color="primary"
-            className={classes.button}>
+          <Button type="submit" variant="contained" size="medium" color="primary">
             Submit
           </Button>
         </form>
