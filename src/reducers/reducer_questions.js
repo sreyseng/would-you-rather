@@ -1,0 +1,14 @@
+import { RECIEVE_QUESTIONS, RECIEVE_QUESTIONS_STATE } from '../actions/index';
+
+export default function recieveQuestions(state = {}, action) {
+  switch (action.type) {
+    case RECIEVE_QUESTIONS:
+      console.log('RECIEVE_QUESTIONS :', action.payload);
+      return { ...state, ...action.payload.questions };
+    case RECIEVE_QUESTIONS_STATE:
+      console.log('RECIEVE_QUESTIONS_STATE :', action.payload);
+      return { ...state, ...action.payload.questionsState };
+    default:
+      return state;
+  }
+}

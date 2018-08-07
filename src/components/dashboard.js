@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import DashboardListItem from './leaderboard_list_item';
+import { handleGetQuestions } from '../actions/index';
 
 const styles = (theme) => ({
   tabs: {
@@ -19,6 +21,10 @@ class Dashboard extends Component {
     this.state = {
       defaultTab: 0
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(handleGetQuestions(this.props.authentication));
   }
 
   handleTabChange(event, defaultTab) {
@@ -45,8 +51,17 @@ class Dashboard extends Component {
   }
 }
 
+function mapStateToProps({ users, questions, authentication, questionsState }) {
+  return {
+    users,
+    questions,
+    questionsState,
+    authentication
+  };
+}
+
 Dashboard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
