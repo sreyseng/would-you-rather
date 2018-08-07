@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -6,6 +7,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+
+import { handleAddQuestion } from '../actions/index';
 
 const OPTION_ONE = 'optionOne';
 const OPTION_TWO = 'optionTwo';
@@ -51,7 +54,17 @@ class NewQuestion extends Component {
 
   onFormSubmit(event) {
     event.preventDefault();
-    console.log('add new question: ', this.state);
+    const question = {
+      author: this.props.authentication,
+      optionOneText: this.state.optionOne,
+      optionTwoText: this.state.optionTwo
+    };
+
+    this.props.dispatch(
+      handleAddQuestion(question, (callback) => {
+        this.props.history.push('/');
+      })
+    );
   }
   render() {
     const { classes } = this.props;
@@ -105,4 +118,10 @@ class NewQuestion extends Component {
   }
 }
 
-export default withStyles(styles)(NewQuestion);
+function mapStateToProps({ authentication }) {
+  return {
+    authentication
+  };
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(NewQuestion));
