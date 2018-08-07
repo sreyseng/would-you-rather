@@ -62,7 +62,7 @@ class DashboardListItem extends Component {
               </Grid>
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item>
               <Avatar className={classes.cardAvatar} alt="complex" src={author.avatarURL} />
             </Grid>
             <Grid item xs={9}>
