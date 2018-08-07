@@ -8,6 +8,7 @@ import Navbar from './navbar';
 import Dashboard from './dashboard';
 import NewQuestion from './new_question';
 import Leaderboard from './leaderboard';
+import QuestionDetails from './question_details';
 import Login from './login';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -15,9 +16,9 @@ import Paper from '@material-ui/core/Paper';
 
 const styles = (theme) => ({
   paper: {
-    ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2,
     marginTop: theme.spacing.unit * 2,
     maxWidth: '75%',
     margin: 'auto'
@@ -41,6 +42,7 @@ class App extends Component {
                     <Route path="/add" component={NewQuestion} />
                     <Route path="/leaderboard" component={Leaderboard} />
                     <Route path="/login" component={Login} />
+                    <Route path="/questions/:id" component={QuestionDetails} />
                     <Route path="/" component={Dashboard} />
                   </Switch>
                 </div>

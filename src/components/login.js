@@ -12,7 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
-import { handleLogin, handleGetUsers } from '../actions';
+import { handleAuthenticateUser, handleGetUsers } from '../actions';
 
 const styles = (theme) => ({
   formstyle: {
@@ -53,7 +53,7 @@ class Login extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch(handleLogin(this.state.user));
+    this.props.dispatch(handleAuthenticateUser(this.state.user));
   };
 
   render() {

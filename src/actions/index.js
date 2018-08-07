@@ -22,12 +22,24 @@ export function handleLogout() {
   };
 }
 
-export function handleLogin(id) {
+export function loginUser(id) {
   return {
     type: SET_AUTHENTICATION,
     payload: {
       authentication: id
     }
+  };
+}
+
+export function handleAuthenticateUser(id) {
+  return (dispatch) => {
+    return _getUsers().then((users) => {
+      const authenticatedUser = users[id];
+      if (authenticatedUser) {
+        dispatch(loginUser(authenticatedUser.id));
+        dispatch(handleGetQuestions(id));
+      }
+    });
   };
 }
 
@@ -40,13 +52,10 @@ function recieveUsers(users) {
   };
 }
 
-export function handleGetUsers() {
+export function handleGetUsers(callback) {
   return (dispatch) => {
     return _getUsers().then((users) => {
       dispatch(recieveUsers(users));
-
-      //todo: REMOVE - auto login during dev
-      dispatch(handleLogin('tylermcginnis'));
     });
   };
 }

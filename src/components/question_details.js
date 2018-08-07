@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
@@ -35,47 +36,49 @@ const styles = (theme) => ({
   }
 });
 
-class LeaderboardListItem extends Component {
+class QuestionDetails extends Component {
   render() {
-    const { classes, user, score } = this.props;
+    const { classes, question, answered, author } = this.props;
+
     return (
       <div className={classes.root}>
+        <Typography variant="headline" align="center" className={classes.spacing}>
+          Question Details
+        </Typography>
         <Card>
           <Grid container direction="row" justify="space-around" alignItems="center">
             <Grid item xs={12} className={classes.cardHeading}>
               <Grid container direction="row" justify="space-between" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom variant="subheading" align="left">
-                    {user.name}
+                    {answered ? 'Asked by John Doe' : 'John Doe asks'}
                   </Typography>
                 </Grid>
 
                 <Grid>
                   <Typography gutterBottom variant="subheading" align="right">
-                    Total Score: {score}
+                    Total Score
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
 
             <Grid item>
-              <Avatar className={classes.cardAvatar} alt="complex" src={user.avatarURL} />
+              <Avatar
+                className={classes.cardAvatar}
+                alt="complex"
+                src="/pexels-photo-450271.jpeg"
+              />
             </Grid>
             <Grid item xs={9}>
               <div className="srey">
-                <Badge
-                  color="primary"
-                  badgeContent={_.size(user.answers)}
-                  className={classes.margin}>
+                <Badge color="primary" badgeContent={4} className={classes.margin}>
                   <Typography className={classes.padding} variant="body2">
                     Answered Questions
                   </Typography>
                 </Badge>
 
-                <Badge
-                  color="primary"
-                  badgeContent={user.questions.length}
-                  className={classes.margin}>
+                <Badge color="primary" badgeContent={4} className={classes.margin}>
                   <Typography className={classes.padding} variant="body2">
                     Created Questions
                   </Typography>
@@ -89,4 +92,24 @@ class LeaderboardListItem extends Component {
   }
 }
 
-export default withStyles(styles)(LeaderboardListItem);
+function mapStateToProps({ questions, users, questionsState }, ownProps) {
+  const question = questions[ownProps.match.id];
+  const author = question ? users[question.author] : '';
+  const answered = question && questionsState[question.id] && questionsState[question.id].option;
+  console.log('question: ', question);
+  console.log('answered: ', answered);
+  console.log('author: ', author);
+
+  console.log('questions: ', question);
+  console.log('questionsState: ', questionsState);
+  console.log('users: ', users);
+  console.log('ownProps: ', ownProps);
+
+  return {
+    question,
+    author,
+    answered
+  };
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(QuestionDetails));

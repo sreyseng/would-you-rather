@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -40,7 +41,7 @@ class DashboardListItem extends Component {
     const { classes, question, author } = this.props;
     console.log('props', this.props);
     if (!question || !author) {
-      return <div>404 HERE</div>;
+      return <div>Question cannot be rendered at this time.</div>;
     }
     return (
       <div className={classes.root}>
@@ -73,7 +74,11 @@ class DashboardListItem extends Component {
                 ...{question.optionOne.text} or {question.optionTwo.text}
               </Typography>
               <Typography align="right">
-                <Button variant="outlined" className={classes.button}>
+                <Button
+                  variant="outlined"
+                  className={classes.button}
+                  component={Link}
+                  to={`/questions/${question.id}`}>
                   View Poll
                 </Button>
               </Typography>
