@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+const dateFormat = require('dateformat');
+const format = 'ddd, mmmm, dS, yyyy, h:MM:ss TT';
 
 const styles = (theme) => ({
   cardAvatar: {
@@ -45,19 +47,30 @@ class DashboardListItem extends Component {
         <Card>
           <Grid container direction="row" justify="space-around" alignItems="center">
             <Grid item xs={12} className={classes.cardHeading}>
-              <Typography gutterBottom variant="subheading">
-                {this.props.author.name} Asks:
-              </Typography>
+              <Grid container direction="row" justify="space-between" alignItems="center">
+                <Grid item>
+                  <Typography gutterBottom variant="subheading" align="left">
+                    {author.name} Asks:
+                  </Typography>
+                </Grid>
+
+                <Grid>
+                  <Typography gutterBottom variant="caption" align="right">
+                    {dateFormat(question.timestamp, format)}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
+
             <Grid item xs={3}>
-              <Avatar className={classes.cardAvatar} alt="complex" src="/default_04.jpeg" />
+              <Avatar className={classes.cardAvatar} alt="complex" src={author.avatarURL} />
             </Grid>
             <Grid item xs={9}>
               <Typography gutterBottom variant="body2">
                 Would you rather...
               </Typography>
               <Typography color="textSecondary">
-                ...{this.props.question.optionOne.text} or {this.props.question.optionTwo.text}
+                ...{question.optionOne.text} or {question.optionTwo.text}
               </Typography>
               <Typography align="right">
                 <Button variant="outlined" className={classes.button}>
