@@ -8,6 +8,7 @@ import Tab from '@material-ui/core/Tab';
 
 import DashboardListItem from './leaderboard_list_item';
 import { handleGetQuestions } from '../actions/index';
+const UNANSWERED_VIEW = 0;
 
 const styles = (theme) => ({
   tabs: {
@@ -20,7 +21,7 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {
-      defaultTab: 0
+      defaultTab: UNANSWERED_VIEW
     };
   }
 
@@ -46,18 +47,40 @@ class Dashboard extends Component {
           <Tab label="Unanswered Questions" />
           <Tab label="Answered Questions" />
         </Tabs>
-        {_.map(this.props.questions, (item) => <DashboardListItem key={item.id} id={item.id} />)}
+        {this.state.defaultTab === UNANSWERED_VIEW
+          ? _.map(this.props.unAnsweredList, (item) => (
+              <DashboardListItem key={item.id} id={item.id} />
+            ))
+          : _.map(this.props.answeredList, (item) => (
+              <DashboardListItem key={item.id} id={item.id} />
+            ))}
       </Fragment>
     );
   }
 }
 
 function mapStateToProps({ questions, authentication, questionsState }) {
-  const answeredList = _.map(questions, (question) => {
-    return;
-  });
+  const answeredList = _
+    .compact(
+      _.map(questions, (question) => {
+        return questionsState[question.id] && questionsState[question.id].option ? question : false;
+      })
+    )
+    .sort((a, b) => b.timestamp - a.timestamp);
+
+  const unAnsweredList = _
+    .compact(
+      _.map(questions, (question) => {
+        return questionsState[question.id] && !questionsState[question.id].option
+          ? question
+          : false;
+      })
+    )
+    .sort((a, b) => b.timestamp - a.timestamp);
+
   return {
-    questions,
+    answeredList,
+    unAnsweredList,
     authentication
   };
 }
