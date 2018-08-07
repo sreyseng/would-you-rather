@@ -1,14 +1,10 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Badge from '@material-ui/core/Badge';
-
-import LeaderboardListItem from './leaderboard_list_item';
 
 const styles = (theme) => ({
   cardAvatar: {
@@ -38,18 +34,12 @@ const styles = (theme) => ({
   }
 });
 
-class Leaderboard extends Component {
+class LeaderboardListItem extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Typography variant="headline" align="center" className={classes.spacing}>
-          Leaderboard
-        </Typography>
-
-        {this.props.sortedUserList.map((user) => <LeaderboardListItem key={user.id} user={user} />)}
-
-        {/* <Card>
+        <Card>
           <Grid container direction="row" justify="space-around" alignItems="center">
             <Grid item xs={12} className={classes.cardHeading}>
               <Grid container direction="row" justify="space-between" alignItems="center">
@@ -88,26 +78,10 @@ class Leaderboard extends Component {
               </div>
             </Grid>
           </Grid>
-        </Card> */}
+        </Card>
       </div>
     );
   }
 }
 
-function mapStateToProps({ users }) {
-  const sortedUserList = _
-    .map(users, (user) => {
-      const size = _.size(user.answers) + user.questions.length;
-      return {
-        user,
-        score: size
-      };
-    })
-    .sort((a, b) => b.score - a.score);
-
-  return {
-    sortedUserList
-  };
-}
-
-export default connect(mapStateToProps)(withStyles(styles)(Leaderboard));
+export default withStyles(styles)(LeaderboardListItem);
