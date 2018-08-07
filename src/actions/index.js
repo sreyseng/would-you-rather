@@ -118,6 +118,7 @@ export function handleAddQuestion(question, callback) {
   return (dispatch) => {
     return _saveQuestion(question).then((result) => {
       dispatch(addQuestion(result));
+      dispatch(handleGetUsers());
       callback();
     });
   };
