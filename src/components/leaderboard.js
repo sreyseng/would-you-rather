@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -89,4 +90,20 @@ class Leaderboard extends Component {
   }
 }
 
-export default connect()(withStyles(styles)(Leaderboard));
+function mapStateToProps({ users }) {
+  const sortedUserList = _
+    .map(users, (user) => {
+      const size = _.size(user.answers) + user.questions.length;
+      return {
+        user,
+        score: size
+      };
+    })
+    .sort((a, b) => b.score - a.score);
+
+  return {
+    sortedUserList
+  };
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(Leaderboard));
