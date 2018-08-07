@@ -47,48 +47,9 @@ class Leaderboard extends Component {
           Leaderboard
         </Typography>
 
-        {this.props.sortedUserList.map((user) => <LeaderboardListItem key={user.id} user={user} />)}
-
-        {/* <Card>
-          <Grid container direction="row" justify="space-around" alignItems="center">
-            <Grid item xs={12} className={classes.cardHeading}>
-              <Grid container direction="row" justify="space-between" alignItems="center">
-                <Grid item>
-                  <Typography gutterBottom variant="subheading" align="left">
-                    John Doe
-                  </Typography>
-                </Grid>
-
-                <Grid>
-                  <Typography gutterBottom variant="subheading" align="right">
-                    Total Score: 114
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item>
-              <Avatar
-                className={classes.cardAvatar}
-                alt="complex"
-                src="/pexels-photo-462680.jpeg"
-              />
-            </Grid>
-            <Grid item xs={9}>
-              <div className="srey">
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
-                  <Typography className={classes.padding}>Answered Questions</Typography>
-                </Badge>
-
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
-                  <Typography className={classes.padding} variant="body2">
-                    Created Questions
-                  </Typography>
-                </Badge>
-              </div>
-            </Grid>
-          </Grid>
-        </Card> */}
+        {this.props.sortedUserList.map((item) => (
+          <LeaderboardListItem key={item.user.id} user={item.user} score={item.score} />
+        ))}
       </div>
     );
   }

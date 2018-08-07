@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -36,7 +37,7 @@ const styles = (theme) => ({
 
 class LeaderboardListItem extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, user, score } = this.props;
     return (
       <div className={classes.root}>
         <Card>
@@ -45,32 +46,34 @@ class LeaderboardListItem extends Component {
               <Grid container direction="row" justify="space-between" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom variant="subheading" align="left">
-                    John Doe
+                    {user.name}
                   </Typography>
                 </Grid>
 
                 <Grid>
                   <Typography gutterBottom variant="subheading" align="right">
-                    Total Score: 114
+                    Total Score: {score}
                   </Typography>
                 </Grid>
               </Grid>
             </Grid>
 
             <Grid item>
-              <Avatar
-                className={classes.cardAvatar}
-                alt="complex"
-                src="/pexels-photo-462680.jpeg"
-              />
+              <Avatar className={classes.cardAvatar} alt="complex" src={user.avatarURL} />
             </Grid>
             <Grid item xs={9}>
               <div className="srey">
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
+                <Badge
+                  color="primary"
+                  badgeContent={_.size(user.answers)}
+                  className={classes.margin}>
                   <Typography className={classes.padding}>Answered Questions</Typography>
                 </Badge>
 
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
+                <Badge
+                  color="primary"
+                  badgeContent={user.questions.length}
+                  className={classes.margin}>
                   <Typography className={classes.padding} variant="body2">
                     Created Questions
                   </Typography>
