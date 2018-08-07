@@ -52,7 +52,10 @@ class Dashboard extends Component {
   }
 }
 
-function mapStateToProps({ questions, authentication }) {
+function mapStateToProps({ questions, authentication, questionsState }) {
+  const answeredList = _.map(questions, (question) => {
+    return;
+  });
   return {
     questions,
     authentication

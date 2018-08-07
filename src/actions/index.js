@@ -82,21 +82,24 @@ function handleGetQuestionsState(questionsState) {
 }
 
 function setStateForAuthentedUser(questions, authentication) {
-  return _.map(questions, (question) => {
-    const obj = {};
-    const optionOne = _.filter(question.optionOne.votes, (item) => {
-      return item === authentication;
-    });
-    const optionTwo = _.filter(question.optionTwo.votes, (item) => {
-      return item === authentication;
-    });
+  return _.keyBy(
+    _.map(questions, (question) => {
+      const obj = {};
+      const optionOne = _.filter(question.optionOne.votes, (item) => {
+        return item === authentication;
+      });
+      const optionTwo = _.filter(question.optionTwo.votes, (item) => {
+        return item === authentication;
+      });
 
-    obj['id'] = question.id;
-    if ((optionOne && optionOne.length > 0) || (optionTwo && optionTwo.length > 0)) {
-      obj['option'] = {
-        vote: optionOne && optionOne.length > 0 ? 'optionOne' : 'optionTwo'
-      };
-    }
-    return obj;
-  });
+      obj['id'] = question.id;
+      if ((optionOne && optionOne.length > 0) || (optionTwo && optionTwo.length > 0)) {
+        obj['option'] = {
+          vote: optionOne && optionOne.length > 0 ? 'optionOne' : 'optionTwo'
+        };
+      }
+      return obj;
+    }),
+    'id'
+  );
 }
