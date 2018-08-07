@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import DashboardListItem from './leaderboard_list_item';
+import DashboardListItem from './dashboard_list_item';
 import { handleGetQuestions } from '../actions/index';
 const UNANSWERED_VIEW = 0;
 
