@@ -93,17 +93,9 @@ class QuestionDetails extends Component {
 }
 
 function mapStateToProps({ questions, users, questionsState }, ownProps) {
-  const question = questions[ownProps.match.id];
+  const question = questions[ownProps.match.params.id];
   const author = question ? users[question.author] : '';
   const answered = question && questionsState[question.id] && questionsState[question.id].option;
-  console.log('question: ', question);
-  console.log('answered: ', answered);
-  console.log('author: ', author);
-
-  console.log('questions: ', question);
-  console.log('questionsState: ', questionsState);
-  console.log('users: ', users);
-  console.log('ownProps: ', ownProps);
 
   return {
     question,

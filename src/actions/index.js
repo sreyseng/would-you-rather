@@ -36,6 +36,7 @@ export function handleAuthenticateUser(id) {
     return _getUsers().then((users) => {
       const authenticatedUser = users[id];
       if (authenticatedUser) {
+        console.log('user authenticated, claling get questions');
         dispatch(loginUser(authenticatedUser.id));
         dispatch(handleGetQuestions(id));
       }
