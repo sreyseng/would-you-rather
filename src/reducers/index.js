@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
 import users from './reducer_user';
 import authentication from './reducer_authentication';
-import questions from './reducer_questions';
+import { recieveQuestionsReducer, recieveQuestionsStateReducer } from './reducer_questions';
 
 const rootReducer = combineReducers({
   users,
   authentication,
-  questions
+  questions: recieveQuestionsReducer,
+  questionsState: recieveQuestionsStateReducer
 });
 
 export default rootReducer;

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -45,17 +46,15 @@ class Dashboard extends Component {
           <Tab label="Unanswered Questions" />
           <Tab label="Answered Questions" />
         </Tabs>
-        <DashboardListItem />
+        {_.map(this.props.questions, (item) => <DashboardListItem key={item.id} id={item.id} />)}
       </Fragment>
     );
   }
 }
 
-function mapStateToProps({ users, questions, authentication, questionsState }) {
+function mapStateToProps({ questions, authentication }) {
   return {
-    users,
     questions,
-    questionsState,
     authentication
   };
 }

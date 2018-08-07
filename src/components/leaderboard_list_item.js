@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -33,27 +34,19 @@ const styles = (theme) => ({
 });
 
 class DashboardListItem extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      defaultTab: 0
-    };
-  }
-
-  handleTabChange(event, defaultTab) {
-    this.setState({ defaultTab });
-  }
-
   render() {
-    const { classes } = this.props;
+    const { classes, question, author } = this.props;
+    console.log('props', this.props);
+    if (!question || !author) {
+      return <div>404 HERE</div>;
+    }
     return (
       <div className={classes.root}>
         <Card>
           <Grid container direction="row" justify="space-around" alignItems="center">
             <Grid item xs={12} className={classes.cardHeading}>
               <Typography gutterBottom variant="subheading">
-                Tyler McGinnis Asks:
+                {this.props.author.name} Asks:
               </Typography>
             </Grid>
             <Grid item xs={3}>
@@ -63,7 +56,9 @@ class DashboardListItem extends Component {
               <Typography gutterBottom variant="body2">
                 Would you rather...
               </Typography>
-              <Typography color="textSecondary">be a software engineer or be a teacher?</Typography>
+              <Typography color="textSecondary">
+                ...{this.props.question.optionOne.text} or {this.props.question.optionTwo.text}
+              </Typography>
               <Typography align="right">
                 <Button variant="outlined" className={classes.button}>
                   View Poll
@@ -77,8 +72,18 @@ class DashboardListItem extends Component {
   }
 }
 
+function mapStateToProps({ users, questions }, ownProps) {
+  const question = questions[ownProps.id];
+  const author = users[question.author];
+
+  return {
+    question,
+    author
+  };
+}
+
 DashboardListItem.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DashboardListItem);
+export default connect(mapStateToProps)(withStyles(styles)(DashboardListItem));
