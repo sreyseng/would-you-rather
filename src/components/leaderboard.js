@@ -2,41 +2,11 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import Badge from '@material-ui/core/Badge';
 
 import LeaderboardListItem from './leaderboard_list_item';
 
-const styles = (theme) => ({
-  cardAvatar: {
-    width: 100,
-    height: 100,
-    margin: 10
-  },
-  padding: {
-    padding: `0 ${theme.spacing.unit * 2}px`
-  },
-  root: {
-    margin: 'auto',
-    flexGrow: 1,
-    maxWidth: 600,
-    padding: theme.spacing.unit * 2
-  },
-  margin: {
-    margin: theme.spacing.unit * 2
-  },
-  spacing: {
-    marginBottom: theme.spacing.unit
-  },
-  cardHeading: {
-    padding: theme.spacing.unit,
-    backgroundColor: theme.palette.grey[200],
-    textAlign: 'left'
-  }
-});
+const styles = (theme) => ({});
 
 class Leaderboard extends Component {
   render() {
