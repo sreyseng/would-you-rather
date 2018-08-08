@@ -137,12 +137,11 @@ export function handleAddQuestion(question, callback) {
   };
 }
 
-export function handleAnswerQuestion(answer, callback) {
+export function handleAnswerQuestion(answer) {
   return (dispatch) => {
-    return _saveQuestionAnswer(answer).then((result) => {
+    return _saveQuestionAnswer(answer).then(() => {
       dispatch(handleGetUsers());
       dispatch(handleGetQuestions(answer.authedUser));
-      callback();
     });
   };
 }

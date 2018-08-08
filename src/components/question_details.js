@@ -65,11 +65,7 @@ class QuestionDetails extends Component {
       answer: this.state.option
     };
 
-    this.props.dispatch(
-      handleAnswerQuestion(answer, (callback) => {
-        console.log('question answer submitted success');
-      })
-    );
+    this.props.dispatch(handleAnswerQuestion(answer));
   }
   handleOptionChange(event) {
     this.setState({
@@ -78,13 +74,12 @@ class QuestionDetails extends Component {
   }
   render() {
     const { classes, question, answered, author } = this.props;
-    console.log('question', question);
     if (!question) {
       return <div>Loading...</div>;
     }
 
     const metadata = {
-      title: answered ? 'Asked by John Doe' : 'John Doe asks',
+      title: answered ? `Asked by ${author.name}` : `${author.name} Asks`,
       subtitle: answered ? 'Results:' : 'Would you rather...'
     };
     return (
@@ -113,11 +108,14 @@ class QuestionDetails extends Component {
             </Grid>
             <Grid item xs={9}>
               <form onSubmit={this.handleSubmit.bind(this)}>
-                <FormControl component="fieldset" className={classes.formControl}>
+                <FormControl
+                  component="fieldset"
+                  className={classes.formControl}
+                  disabled={answered ? true : false}>
                   <FormLabel component="legend">{metadata.subtitle}</FormLabel>
                   <RadioGroup
                     onChange={this.handleOptionChange.bind(this)}
-                    value={this.state.option}>
+                    value={answered ? answered.vote : this.state.option}>
                     <FormControlLabel
                       value="optionOne"
                       control={<Radio />}
@@ -129,14 +127,16 @@ class QuestionDetails extends Component {
                       label={question.optionTwo.text}
                     />
                   </RadioGroup>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    size="medium"
-                    color="primary"
-                    className={classes.button}>
-                    Submit
-                  </Button>
+                  {!answered && (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      size="medium"
+                      color="primary"
+                      className={classes.button}>
+                      Submit
+                    </Button>
+                  )}
                 </FormControl>
               </form>
             </Grid>
@@ -150,7 +150,10 @@ class QuestionDetails extends Component {
 function mapStateToProps({ questions, users, questionsState, authentication }, ownProps) {
   const question = questions[ownProps.match.params.id];
   const author = question ? users[question.author] : '';
-  const answered = question && questionsState[question.id] && questionsState[question.id].option;
+  const answered =
+    question && questionsState[question.id] && questionsState[question.id].option
+      ? questionsState[question.id].option
+      : false;
 
   return {
     question,
