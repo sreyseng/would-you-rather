@@ -11,6 +11,7 @@ import NewQuestion from './new_question';
 import Leaderboard from './leaderboard';
 import QuestionDetails from './question_details';
 import Login from './login';
+import ErrorPage from './error';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -45,6 +46,7 @@ class App extends Component {
                     <Route path="/leaderboard" component={Leaderboard} />
                     <Route path="/login" component={Login} />
                     <Route path="/questions/:id" component={QuestionDetails} />
+                    <Route path="/error" component={ErrorPage} />
                     <Route path="/" component={Dashboard} />
                   </Switch>
                 </div>

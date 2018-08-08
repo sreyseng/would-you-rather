@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
@@ -89,7 +90,7 @@ class QuestionDetails extends Component {
   render() {
     const { classes, question, answered, author, total } = this.props;
     if (!question) {
-      return <div>Loading...</div>;
+      return <Redirect to="/error" />;
     }
 
     const metadata = {
