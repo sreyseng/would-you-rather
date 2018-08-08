@@ -12,6 +12,7 @@
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [Create React App](https://github.com/facebookincubator/create-react-app)
+- [Lodash](https://lodash.com/docs/4.17.10)
 - [Material UI](https://www.npmjs.com/package/@material-ui/core)
 - [Material Icons](https://www.npmjs.com/package/@material-ui/icons)
 
