@@ -69,9 +69,6 @@ export function handleGetUsers(callback) {
   return (dispatch) => {
     return _getUsers().then((users) => {
       dispatch(recieveUsers(users));
-
-      //todo: REMOVE - auto login during dev
-      // dispatch(handleAuthenticateUser('tylermcginnis'));
     });
   };
 }
