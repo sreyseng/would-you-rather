@@ -88,9 +88,15 @@ class QuestionDetails extends Component {
     });
   }
   render() {
-    const { classes, question, answered, author, total } = this.props;
-    if (!question) {
+    const { classes, question, answered, author, total, loading } = this.props;
+
+    /**
+     * Distinguish between still loading versus invalid question
+     */
+    if (!question && !loading) {
       return <Redirect to="/error" />;
+    } else if (!question) {
+      return <div />;
     }
 
     const metadata = {
@@ -132,10 +138,9 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionOne.votes.length} out of {total} votes (`{(question.optionOne
-                        .votes.length /
-                        total) *
-                        100}%`)
+                      {question.optionOne.votes.length} out of {total} votes (`{Math.floor(
+                        (question.optionOne.votes.length / total) * 100
+                      )}%`)
                     </Typography>
                   </div>
                   <div className={classes.progressBarHolder}>
@@ -150,10 +155,9 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionTwo.votes.length} out of {total} votes ({(question.optionTwo
-                        .votes.length /
-                        total) *
-                        100}%`)
+                      {question.optionTwo.votes.length} out of {total} votes ({Math.floor(
+                        (question.optionTwo.votes.length / total) * 100
+                      )}%`)
                     </Typography>
                   </div>
                 </div>
@@ -194,7 +198,7 @@ class QuestionDetails extends Component {
   }
 }
 
-function mapStateToProps({ questions, users, questionsState, authentication }, ownProps) {
+function mapStateToProps({ questions, users, questionsState, authentication, loading }, ownProps) {
   const question = questions[ownProps.match.params.id];
   const author = question ? users[question.author] : '';
   const answered =
@@ -205,6 +209,7 @@ function mapStateToProps({ questions, users, questionsState, authentication }, o
   const total = question ? question.optionOne.votes.length + question.optionTwo.votes.length : 0;
 
   return {
+    loading,
     question,
     author,
     answered,
