@@ -2,7 +2,7 @@ let users = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
-    avatarURL: '/pexels-photo-450271.jpeg',
+    avatarURL: 'pexels-photo-712521.jpeg',
     answers: {
       '8xf0y6ziyjabvozdd253nd': 'optionOne',
       '6ni6ok3ym7mf1p33lnez': 'optionOne',
@@ -24,7 +24,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: '/pexels-photo-712521.jpeg',
+    avatarURL: '//pexels-photo-450271.jpeg',
     answers: {
       xj352vofupe1dqz9emx13r: 'optionOne',
       vthrdm985a262al8qx3do: 'optionTwo',

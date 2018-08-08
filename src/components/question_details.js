@@ -114,11 +114,7 @@ class QuestionDetails extends Component {
             </Grid>
 
             <Grid item>
-              <Avatar
-                className={classes.cardAvatar}
-                alt="complex"
-                src="/pexels-photo-450271.jpeg"
-              />
+              <Avatar className={classes.cardAvatar} alt="complex" src={author.avatarURL} />
             </Grid>
             <Grid item xs={9}>
               {answered ? (
