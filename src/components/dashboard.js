@@ -7,7 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import DashboardListItem from './dashboard_list_item';
-import { handleGetQuestions } from '../actions/index';
+import { handleGetQuestions, handleLoading } from '../actions/index';
 const UNANSWERED_VIEW = 0;
 
 const styles = (theme) => ({
@@ -26,7 +26,12 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(handleGetQuestions(this.props.authentication));
+    this.props.dispatch(handleLoading(true));
+    this.props.dispatch(
+      handleGetQuestions(this.props.authentication, (callback) => {
+        this.props.dispatch(handleLoading(false));
+      })
+    );
   }
 
   handleTabChange(event, defaultTab) {

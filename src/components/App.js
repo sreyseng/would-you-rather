@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import Navbar from './navbar';
 import Dashboard from './dashboard';
@@ -35,6 +36,7 @@ class App extends Component {
         <BrowserRouter>
           <div>
             <Navbar />
+            {this.props.loading && <LinearProgress />}
             <Paper className={this.props.classes.paper} elevation={1}>
               {this.props.authentication ? (
                 <div>
@@ -59,9 +61,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authentication }) {
+function mapStateToProps({ authentication, loading }) {
   return {
-    authentication
+    authentication,
+    loading
   };
 }
 

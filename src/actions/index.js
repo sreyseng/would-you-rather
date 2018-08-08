@@ -8,6 +8,19 @@ export const RECIEVE_USERS = 'RECIEVE_USERS';
 export const RECIEVE_QUESTIONS = 'RECIEVE_QUESTIONS';
 export const RECIEVE_QUESTIONS_STATE = 'RECIEVE_QUESTIONS_STATE';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const SET_LOADING = 'SET_LOADING';
+
+/**
+ * PROGRESS BAR
+ */
+export function handleLoading(loading) {
+  return {
+    type: SET_LOADING,
+    payload: {
+      loading
+    }
+  };
+}
 
 /**
  * USER / USER AUTHENTICATION
@@ -36,7 +49,6 @@ export function handleAuthenticateUser(id) {
     return _getUsers().then((users) => {
       const authenticatedUser = users[id];
       if (authenticatedUser) {
-        console.log('user authenticated, claling get questions');
         dispatch(loginUser(authenticatedUser.id));
         dispatch(handleGetQuestions(id));
       }
@@ -77,11 +89,12 @@ function recieveQuestions(questions) {
   };
 }
 
-export function handleGetQuestions(authentication) {
+export function handleGetQuestions(authentication, callback) {
   return (dispatch) => {
     return _getQuestions().then((questions) => {
       dispatch(recieveQuestions(questions));
       dispatch(handleGetQuestionsState(setStateForAuthentedUser(questions, authentication)));
+      dispatch(handleLoading(false));
     });
   };
 }
