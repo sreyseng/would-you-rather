@@ -39,7 +39,6 @@ const styles = (theme) => ({
 class DashboardListItem extends Component {
   render() {
     const { classes, question, author } = this.props;
-    console.log('props', this.props);
     if (!question || !author) {
       return <div>Question cannot be rendered at this time.</div>;
     }

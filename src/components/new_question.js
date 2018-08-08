@@ -8,7 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
-import { handleAddQuestion } from '../actions/index';
+import { handleAddQuestion, handleLoading } from '../actions/index';
 
 const OPTION_ONE = 'optionOne';
 const OPTION_TWO = 'optionTwo';
@@ -60,8 +60,10 @@ class NewQuestion extends Component {
       optionTwoText: this.state.optionTwo
     };
 
+    this.props.dispatch(handleLoading(true));
     this.props.dispatch(
       handleAddQuestion(question, (callback) => {
+        this.props.dispatch(handleLoading(false));
         this.props.history.push('/');
       })
     );

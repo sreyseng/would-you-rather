@@ -20,7 +20,7 @@ const styles = (theme) => ({
   },
   formControl: {
     textAlign: 'left',
-    width: '100%',
+    width: '95%',
     margin: theme.spacing.unit
   },
   selectEmpty: {
@@ -43,7 +43,6 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.props.dispatch(handleGetUsers());
   }
 
