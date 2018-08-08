@@ -59,7 +59,7 @@ export function handleGetUsers(callback) {
       dispatch(recieveUsers(users));
 
       //todo: REMOVE - auto login during dev
-      dispatch(handleAuthenticateUser('tylermcginnis'));
+      // dispatch(handleAuthenticateUser('tylermcginnis'));
     });
   };
 }

@@ -11,6 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import Star from '@material-ui/icons/Star';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { handleAnswerQuestion } from '../actions/index';
@@ -52,7 +53,6 @@ const styles = (theme) => ({
     margin: 20
   },
   progressBar: {
-    width: '95%',
     height: 20
   }
 });
@@ -119,7 +119,7 @@ class QuestionDetails extends Component {
                 <div>
                   <div className={classes.progressBarHolder}>
                     <Typography variant="subheading">
-                      Option 1:
+                      Option 1: {answered.vote === 'optionOne' ? <Star color="secondary" /> : ''}
                       <Typography variant="body1">{question.optionOne.text}</Typography>
                     </Typography>
                     <LinearProgress
@@ -134,7 +134,7 @@ class QuestionDetails extends Component {
                   </div>
                   <div className={classes.progressBarHolder}>
                     <Typography variant="subheading">
-                      Option 2:
+                      Option 2: {answered.vote === 'optionTwo' ? <Star color="secondary" /> : ''}
                       <Typography variant="body1">{question.optionTwo.text}</Typography>
                     </Typography>
                     <LinearProgress
