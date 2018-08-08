@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import { handleAnswerQuestion } from '../actions/index';
 
 const styles = (theme) => ({
   cardAvatar: {
@@ -56,6 +57,20 @@ class QuestionDetails extends Component {
     };
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const answer = {
+      authedUser: this.props.authentication,
+      qid: this.props.question.id,
+      answer: this.state.option
+    };
+
+    this.props.dispatch(
+      handleAnswerQuestion(answer, (callback) => {
+        console.log('question answer submitted success');
+      })
+    );
+  }
   handleOptionChange(event) {
     this.setState({
       option: event.target.value
@@ -97,7 +112,7 @@ class QuestionDetails extends Component {
               />
             </Grid>
             <Grid item xs={9}>
-              <form>
+              <form onSubmit={this.handleSubmit.bind(this)}>
                 <FormControl component="fieldset" className={classes.formControl}>
                   <FormLabel component="legend">{metadata.subtitle}</FormLabel>
                   <RadioGroup
@@ -132,7 +147,7 @@ class QuestionDetails extends Component {
   }
 }
 
-function mapStateToProps({ questions, users, questionsState }, ownProps) {
+function mapStateToProps({ questions, users, questionsState, authentication }, ownProps) {
   const question = questions[ownProps.match.params.id];
   const author = question ? users[question.author] : '';
   const answered = question && questionsState[question.id] && questionsState[question.id].option;
@@ -140,7 +155,8 @@ function mapStateToProps({ questions, users, questionsState }, ownProps) {
   return {
     question,
     author,
-    answered
+    answered,
+    authentication
   };
 }
 

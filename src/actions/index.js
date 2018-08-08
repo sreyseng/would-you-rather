@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import { _getUsers, _getQuestions, _saveQuestion } from '../utils/_DATA';
+import { _getUsers, _getQuestions, _saveQuestion, _saveQuestionAnswer } from '../utils/_DATA';
 
 export const SET_AUTHENTICATION = 'SET_AUTHENTICATION';
 export const REMOVE_AUTHENTICATION = 'REMOVE_AUTHENTICATION';
@@ -132,6 +132,16 @@ export function handleAddQuestion(question, callback) {
     return _saveQuestion(question).then((result) => {
       dispatch(addQuestion(result));
       dispatch(handleGetUsers());
+      callback();
+    });
+  };
+}
+
+export function handleAnswerQuestion(answer, callback) {
+  return (dispatch) => {
+    return _saveQuestionAnswer(answer).then((result) => {
+      dispatch(handleGetUsers());
+      dispatch(handleGetQuestions(answer.authedUser));
       callback();
     });
   };
