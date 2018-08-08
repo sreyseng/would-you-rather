@@ -111,7 +111,7 @@ class NewQuestion extends Component {
             color="primary"
             className={classes.button}>
             Submit
-          </Button>{' '}
+          </Button>
         </form>
       </div>
     );

@@ -6,7 +6,12 @@ import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import Badge from '@material-ui/core/Badge';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
   cardAvatar: {
@@ -33,13 +38,40 @@ const styles = (theme) => ({
     padding: theme.spacing.unit,
     backgroundColor: theme.palette.grey[200],
     textAlign: 'left'
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3
+  },
+  button: {
+    width: 150,
+    margin: 10
   }
 });
 
 class QuestionDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      option: ''
+    };
+  }
+
+  handleOptionChange(event) {
+    this.setState({
+      option: event.target.value
+    });
+  }
   render() {
     const { classes, question, answered, author } = this.props;
+    console.log('question', question);
+    if (!question) {
+      return <div>Loading...</div>;
+    }
 
+    const metadata = {
+      title: answered ? 'Asked by John Doe' : 'John Doe asks',
+      subtitle: answered ? 'Results:' : 'Would you rather...'
+    };
     return (
       <div className={classes.root}>
         <Typography variant="headline" align="center" className={classes.spacing}>
@@ -51,13 +83,7 @@ class QuestionDetails extends Component {
               <Grid container direction="row" justify="space-between" alignItems="center">
                 <Grid item>
                   <Typography gutterBottom variant="subheading" align="left">
-                    {answered ? 'Asked by John Doe' : 'John Doe asks'}
-                  </Typography>
-                </Grid>
-
-                <Grid>
-                  <Typography gutterBottom variant="subheading" align="right">
-                    Total Score
+                    {metadata.title}
                   </Typography>
                 </Grid>
               </Grid>
@@ -71,19 +97,33 @@ class QuestionDetails extends Component {
               />
             </Grid>
             <Grid item xs={9}>
-              <div className="srey">
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
-                  <Typography className={classes.padding} variant="body2">
-                    Answered Questions
-                  </Typography>
-                </Badge>
-
-                <Badge color="primary" badgeContent={4} className={classes.margin}>
-                  <Typography className={classes.padding} variant="body2">
-                    Created Questions
-                  </Typography>
-                </Badge>
-              </div>
+              <form>
+                <FormControl component="fieldset" className={classes.formControl}>
+                  <FormLabel component="legend">{metadata.subtitle}</FormLabel>
+                  <RadioGroup
+                    onChange={this.handleOptionChange.bind(this)}
+                    value={this.state.option}>
+                    <FormControlLabel
+                      value="optionOne"
+                      control={<Radio />}
+                      label={question.optionOne.text}
+                    />
+                    <FormControlLabel
+                      value="optionTwo"
+                      control={<Radio />}
+                      label={question.optionTwo.text}
+                    />
+                  </RadioGroup>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    size="medium"
+                    color="primary"
+                    className={classes.button}>
+                    Submit
+                  </Button>
+                </FormControl>
+              </form>
             </Grid>
           </Grid>
         </Card>
