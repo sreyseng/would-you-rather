@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -12,6 +11,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 import { handleAnswerQuestion } from '../actions/index';
 
 const styles = (theme) => ({
@@ -46,6 +47,13 @@ const styles = (theme) => ({
   button: {
     width: 150,
     margin: 10
+  },
+  progressBarHolder: {
+    margin: 20
+  },
+  progressBar: {
+    width: '95%',
+    height: 20
   }
 });
 
@@ -73,7 +81,7 @@ class QuestionDetails extends Component {
     });
   }
   render() {
-    const { classes, question, answered, author } = this.props;
+    const { classes, question, answered, author, total } = this.props;
     if (!question) {
       return <div>Loading...</div>;
     }
@@ -107,27 +115,57 @@ class QuestionDetails extends Component {
               />
             </Grid>
             <Grid item xs={9}>
-              <form onSubmit={this.handleSubmit.bind(this)}>
-                <FormControl
-                  component="fieldset"
-                  className={classes.formControl}
-                  disabled={answered ? true : false}>
-                  <FormLabel component="legend">{metadata.subtitle}</FormLabel>
-                  <RadioGroup
-                    onChange={this.handleOptionChange.bind(this)}
-                    value={answered ? answered.vote : this.state.option}>
-                    <FormControlLabel
-                      value="optionOne"
-                      control={<Radio />}
-                      label={question.optionOne.text}
+              {answered ? (
+                <div>
+                  <div className={classes.progressBarHolder}>
+                    <Typography variant="subheading">
+                      Option 1:
+                      <Typography variant="body1">{question.optionOne.text}</Typography>
+                    </Typography>
+                    <LinearProgress
+                      color="primary"
+                      variant="determinate"
+                      value={(question.optionOne.votes.length / total) * 100}
+                      className={classes.progressBar}
                     />
-                    <FormControlLabel
-                      value="optionTwo"
-                      control={<Radio />}
-                      label={question.optionTwo.text}
+                    <Typography variant="caption" align="center">
+                      {question.optionOne.votes.length} out of {total} votes
+                    </Typography>
+                  </div>
+                  <div className={classes.progressBarHolder}>
+                    <Typography variant="subheading">
+                      Option 2:
+                      <Typography variant="body1">{question.optionTwo.text}</Typography>
+                    </Typography>
+                    <LinearProgress
+                      color="primary"
+                      variant="determinate"
+                      value={(question.optionTwo.votes.length / total) * 100}
+                      className={classes.progressBar}
                     />
-                  </RadioGroup>
-                  {!answered && (
+                    <Typography variant="caption" align="center">
+                      {question.optionTwo.votes.length} out of {total} votes
+                    </Typography>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                  <FormControl component="fieldset" className={classes.formControl}>
+                    <FormLabel component="legend">{metadata.subtitle}</FormLabel>
+                    <RadioGroup
+                      onChange={this.handleOptionChange.bind(this)}
+                      value={this.state.option}>
+                      <FormControlLabel
+                        value="optionOne"
+                        control={<Radio />}
+                        label={question.optionOne.text}
+                      />
+                      <FormControlLabel
+                        value="optionTwo"
+                        control={<Radio />}
+                        label={question.optionTwo.text}
+                      />
+                    </RadioGroup>
                     <Button
                       type="submit"
                       variant="contained"
@@ -136,9 +174,9 @@ class QuestionDetails extends Component {
                       className={classes.button}>
                       Submit
                     </Button>
-                  )}
-                </FormControl>
-              </form>
+                  </FormControl>
+                </form>
+              )}
             </Grid>
           </Grid>
         </Card>
@@ -155,11 +193,14 @@ function mapStateToProps({ questions, users, questionsState, authentication }, o
       ? questionsState[question.id].option
       : false;
 
+  const total = question ? question.optionOne.votes.length + question.optionTwo.votes.length : 0;
+
   return {
     question,
     author,
     answered,
-    authentication
+    authentication,
+    total
   };
 }
 
