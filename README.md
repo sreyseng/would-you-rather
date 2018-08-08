@@ -1,6 +1,6 @@
 # Would You Rather
 
-`Would You Rather` is a web application front end built on top of the provided mock backend to explore react and redux.
+`Would You Rather` is a web application front end built from the ground up as a UI for the provided mock backend to explore React, Redux, and Material UI.
 
 ## To start the application:
 
@@ -32,3 +32,5 @@ All material design components used in this project makes use of demo examples a
 - [Selection Controls](https://material-ui.com/demos/selection-controls/)
 - [Typography](https://material-ui.com/style/typography/)
 - [Icons](https://material-ui.com/style/icons/)
+
+This project also uses the [Chirper](https://github.com/udacity/reactnd-chirper-app) project as reference material.
