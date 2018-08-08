@@ -131,7 +131,10 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionOne.votes.length} out of {total} votes
+                      {question.optionOne.votes.length} out of {total} votes (`{(question.optionOne
+                        .votes.length /
+                        total) *
+                        100}%`)
                     </Typography>
                   </div>
                   <div className={classes.progressBarHolder}>
@@ -146,7 +149,10 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionTwo.votes.length} out of {total} votes
+                      {question.optionTwo.votes.length} out of {total} votes ({(question.optionTwo
+                        .votes.length /
+                        total) *
+                        100}%`)
                     </Typography>
                   </div>
                 </div>
