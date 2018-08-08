@@ -71,7 +71,9 @@ class Login extends Component {
     return (
       <div className={classes.content}>
         <Typography variant="headline">Welcome to the Would You Rather App!</Typography>
-        <Typography variant="subheading">Please sign in to continue.</Typography>
+        <Typography variant="subheading" color="error">
+          Please sign in to continue.
+        </Typography>
 
         <form
           className={classes.formstyle}
