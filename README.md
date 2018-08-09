@@ -21,6 +21,10 @@ Limitations:
 - application state will not persist on browser refresh
 ```
 
+## Demo
+
+![Application](demo/would_you_rather.gif)
+
 ## To start the application:
 
 - Install all project dependencies with `npm install`
