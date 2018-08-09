@@ -16,6 +16,8 @@ import ErrorPage from './error';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
+const { PUBLIC_URL } = process.env;
+
 const styles = (theme) => ({
   paper: {
     paddingTop: theme.spacing.unit * 2,
@@ -34,7 +36,7 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
+        <BrowserRouter basename={PUBLIC_URL}>
           <div>
             <Navbar />
             {this.props.loading && <LinearProgress />}
@@ -42,12 +44,13 @@ class App extends Component {
               {this.props.authentication ? (
                 <div>
                   <Switch>
-                    <Route path="/add" component={NewQuestion} />
-                    <Route path="/leaderboard" component={Leaderboard} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/questions/:id" component={QuestionDetails} />
-                    <Route path="/error" component={ErrorPage} />
-                    <Route path="/" component={Dashboard} />
+                    <Route exact path="/add" component={NewQuestion} />
+                    <Route exact path="/leaderboard" component={Leaderboard} />
+                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/questions/:id" component={QuestionDetails} />
+                    <Route exact path="/error" component={ErrorPage} />
+                    <Route exact path="/" component={Dashboard} />
+                    <Route component={ErrorPage} />
                   </Switch>
                 </div>
               ) : (

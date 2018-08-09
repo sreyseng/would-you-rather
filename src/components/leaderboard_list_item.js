@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import Badge from '@material-ui/core/Badge';
 
+const { PUBLIC_URL } = process.env;
 const styles = (theme) => ({
   cardAvatar: {
     width: 100,
@@ -59,7 +60,11 @@ class LeaderboardListItem extends Component {
             </Grid>
 
             <Grid item>
-              <Avatar className={classes.cardAvatar} alt="complex" src={user.avatarURL} />
+              <Avatar
+                className={classes.cardAvatar}
+                alt="complex"
+                src={`${PUBLIC_URL}/${user.avatarURL}`}
+              />
             </Grid>
             <Grid item xs={9}>
               <div className="srey">

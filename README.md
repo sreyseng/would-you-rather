@@ -8,6 +8,11 @@ Users will be able to answer questions, see which questions they haven’t answe
 
 https://sreyseng.github.io/would-you-rather/
 
+```
+Demo Limitations:
+- application state will not persist on browser refresh
+```
+
 ## To start the application:
 
 - Install all project dependencies with `npm install`

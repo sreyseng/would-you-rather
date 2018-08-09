@@ -17,6 +17,8 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { handleAnswerQuestion, handleLoading } from '../actions/index';
 
+const { PUBLIC_URL } = process.env;
+
 const styles = (theme) => ({
   cardAvatar: {
     width: 100,
@@ -121,7 +123,11 @@ class QuestionDetails extends Component {
             </Grid>
 
             <Grid item>
-              <Avatar className={classes.cardAvatar} alt="complex" src={author.avatarURL} />
+              <Avatar
+                className={classes.cardAvatar}
+                alt="complex"
+                src={`${PUBLIC_URL}/${author.avatarURL}`}
+              />
             </Grid>
             <Grid item xs={9}>
               {answered ? (
@@ -138,9 +144,9 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionOne.votes.length} out of {total} votes (`{Math.floor(
-                        (question.optionOne.votes.length / total) * 100
-                      )}%`)
+                      {question.optionOne.votes.length} out of {total} votes (`
+                      {Math.floor((question.optionOne.votes.length / total) * 100)}
+                      %`)
                     </Typography>
                   </div>
                   <div className={classes.progressBarHolder}>
@@ -155,9 +161,9 @@ class QuestionDetails extends Component {
                       className={classes.progressBar}
                     />
                     <Typography variant="caption" align="center">
-                      {question.optionTwo.votes.length} out of {total} votes ({Math.floor(
-                        (question.optionTwo.votes.length / total) * 100
-                      )}%`)
+                      {question.optionTwo.votes.length} out of {total} votes (
+                      {Math.floor((question.optionTwo.votes.length / total) * 100)}
+                      %`)
                     </Typography>
                   </div>
                 </div>
@@ -184,6 +190,7 @@ class QuestionDetails extends Component {
                       variant="contained"
                       size="medium"
                       color="primary"
+                      disabled={this.state.option === '' ? true : false}
                       className={classes.button}>
                       Submit
                     </Button>

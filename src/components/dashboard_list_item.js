@@ -8,8 +8,10 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import { Typography } from '../../node_modules/@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+
 const dateFormat = require('dateformat');
 const format = 'ddd, mmmm, dS, yyyy, h:MM:ss TT';
+const { PUBLIC_URL } = process.env;
 
 const styles = (theme) => ({
   cardAvatar: {
@@ -63,14 +65,19 @@ class DashboardListItem extends Component {
             </Grid>
 
             <Grid item>
-              <Avatar className={classes.cardAvatar} alt="complex" src={author.avatarURL} />
+              <Avatar
+                className={classes.cardAvatar}
+                alt="complex"
+                src={`${PUBLIC_URL}/${author.avatarURL}`}
+              />
             </Grid>
             <Grid item xs={9}>
               <Typography gutterBottom variant="body2">
                 Would you rather...
               </Typography>
               <Typography color="textSecondary">
-                ...{question.optionOne.text} or {question.optionTwo.text}
+                ...
+                {question.optionOne.text} or {question.optionTwo.text}
               </Typography>
               <Typography align="right">
                 <Button

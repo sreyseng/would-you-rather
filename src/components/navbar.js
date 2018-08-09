@@ -10,6 +10,8 @@ import Avatar from '@material-ui/core/Avatar';
 
 import { handleLogout } from '../actions';
 
+const { PUBLIC_URL } = process.env;
+
 const ROOT = '/';
 export const ADD = '/add';
 const LEADERBOARD = '/leaderboard';
@@ -83,7 +85,7 @@ class Navbar extends Component {
                   <Button color="inherit" onClick={this.logout.bind(this)}>
                     <Avatar
                       alt={this.props.user.name}
-                      src={this.props.user.avatarURL}
+                      src={`${PUBLIC_URL}/${this.props.user.avatarURL}`}
                       className={classes.avatar}
                     />
                     Logout
@@ -91,7 +93,7 @@ class Navbar extends Component {
                 </div>
               ) : (
                 <div>
-                  <Button color="inherit" to="/" component={Link}>
+                  <Button color="inherit" to={ROOT} component={Link}>
                     Login
                   </Button>
                 </div>
