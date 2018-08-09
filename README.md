@@ -2,6 +2,12 @@
 
 `Would You Rather` is a web application front end built from the ground up as a UI for the provided mock backend to explore React, Redux, and Material UI.
 
+Users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
+
+## Live Demo
+
+https://sreyseng.github.io/would-you-rather/
+
 ## To start the application:
 
 - Install all project dependencies with `npm install`
