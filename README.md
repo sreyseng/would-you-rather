@@ -9,7 +9,15 @@ Users will be able to answer questions, see which questions they haven’t answe
 https://sreyseng.github.io/would-you-rather/
 
 ```
-Demo Limitations:
+Authenticated users will be able to:
+
+- vote on questions asked by others
+- view answered and unanswered questions
+- view how other people have voted
+- post new questions
+- see ranking of users on the leaderboard
+
+Limitations:
 - application state will not persist on browser refresh
 ```
 
